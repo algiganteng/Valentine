@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffdae0;
+            background-image: radial-gradient(#ffb7c5 20%, transparent 20%), radial-gradient(#ffb7c5 20%, transparent 20%);
+            background-position: 0 0, 25px 25px;
+            background-size: 50px 50px;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 85%;
+            max-width: 350px;
+            z-index: 10;
+        }
+
+        h1 { color: #d63384; font-size: 20px; }
+        
+        .gif { width: 100%; border-radius: 15px; margin-bottom: 20px; }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            height: 50px;
+            position: relative;
+        }
+
+        button {
+            padding: 10px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        #btnYes { background-color: #ff4d6d; color: white; }
+
+        #btnNo { 
+            background-color: #888; 
+            color: white; 
+            transition: 0.1s;
+        }
+
+        /* Gaya saat tombol rusak/patah */
+        .broken {
+            transform: rotate(-15px) translateY(10px) !important;
+            background-color: #555 !important;
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+    <div class="card" id="mainCard">
+        <div id="ask">
+            <img class="gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueG5zZ3E0eHh4bmx4bmx4bmx4bmx4bmx4bmx4bmx4bmx4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/c76IJLufpNwSULPk77/giphy.gif">
+            <h1>Will you be my Valentine? ❤️</h1>
+            <div class="btn-container">
+                <button id="btnYes" onclick="celebrate()">YES</button>
+                <button id="btnNo" onmouseover="dodge()" onclick="brokenButton()">NO</button>
+            </div>
+        </div>
+
+        <div id="happy" class="hidden">
+            <img class="gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIyc2VwMmt4ZzRndmZueGZ4bmx4bmx4bmx4bmx4bmx4bmx4bmx4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/KztT2c4u8mYYUiCi7C/giphy.gif">
+            <h1>Hehehe I knew it! 💖</h1>
+            <p>See you on Feb 14th!</p>
+        </div>
+    </div>
+
+    <script>
+        function dodge() {
+            // Hanya lari kalau belum "rusak"
+            const btnNo = document.getElementById('btnNo');
+            if(!btnNo.classList.contains('broken')) {
+                const x = Math.random() * (window.innerWidth - btnNo.offsetWidth);
+                const y = Math.random() * (window.innerHeight - btnNo.offsetHeight);
+                btnNo.style.position = "fixed";
+                btnNo.style.left = x + "px";
+                btnNo.style.top = y + "px";
+            }
+        }
+
+        function brokenButton() {
+            const btnNo = document.getElementById('btnNo');
+            btnNo.classList.add('broken');
+            btnNo.innerText = "RUSAK";
+            alert("Sorry, gak bisa dipencet, tombolnya rusak :P");
+        }
+
+        function celebrate() {
+            document.getElementById('ask').classList.add('hidden');
+            document.getElementById('happy').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
